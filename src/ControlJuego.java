@@ -39,14 +39,27 @@ public class ControlJuego {
 		tablero = new int[10][10];
 		Random rd = new Random();
 
-		for (int i = 0; i < MINAS_INICIALES; i++) {
+		/*for (int i = 0; i < MINAS_INICIALES; i++) {
 			int coordX = rd.nextInt(10), coordY = rd.nextInt(10);
 			if (tablero[coordX][coordY] != -1) {
 				tablero[coordX][coordY] = -1;
 			}else {
 				i--;
 			}
+		}*/
+		tablero[2][2]=-1;
+		
+		
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero[i].length; j++) {
+				if(tablero[i][j]==-1){
+					calculoMinasAdjuntas(i, j);
+				}
+			}
+			System.out.println();
 		}
+		System.out.println("\nPuntuación: " + puntuacion);
+		
 		depurarTablero();
 
 	}
@@ -63,9 +76,15 @@ public class ControlJuego {
 	 *            posición horizontalmente de la casilla a rellenar
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
 	 **/
-//	private int calculoMinasAdjuntas(int i, int j) {
-//
-//	}
+	private int calculoMinasAdjuntas(int i, int j) {
+System.out.println(i+","+j);
+		for (int j2 = i-1; j2 < i+2; j2++) {
+			for (int k = j-1; k < j+2; k++) {
+				tablero[j2][k]=7;
+			}
+		}
+		return 1;
+	}
 
 	/**
 	 * Método que nos permite
