@@ -39,27 +39,27 @@ public class ControlJuego {
 		tablero = new int[10][10];
 		Random rd = new Random();
 
-		/*for (int i = 0; i < MINAS_INICIALES; i++) {
+		for (int i = 0; i < MINAS_INICIALES; i++) {
 			int coordX = rd.nextInt(10), coordY = rd.nextInt(10);
 			if (tablero[coordX][coordY] != -1) {
 				tablero[coordX][coordY] = -1;
-			}else {
+			} else {
 				i--;
 			}
-		}*/
-		tablero[2][2]=-1;
-		
-		
+		}
+
+		// tablero[2][2] = -1;
+
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
-				if(tablero[i][j]==-1){
+				if (tablero[i][j] == -1) {
 					calculoMinasAdjuntas(i, j);
 				}
 			}
 			System.out.println();
 		}
 		System.out.println("\nPuntuación: " + puntuacion);
-		
+
 		depurarTablero();
 
 	}
@@ -77,12 +77,17 @@ public class ControlJuego {
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
 	 **/
 	private int calculoMinasAdjuntas(int i, int j) {
-System.out.println(i+","+j);
-		for (int j2 = i-1; j2 < i+2; j2++) {
-			for (int k = j-1; k < j+2; k++) {
-				tablero[j2][k]=7;
+		System.out.println(i + "," + j);
+		if ((i > 0 && j > 0) && (i < (LADO_TABLERO - 1) && j > (LADO_TABLERO - 1))) {
+			for (int j2 = i - 1; j2 < i + 2; j2++) {
+				for (int k = j - 1; k < j + 2; k++) {
+					if (tablero[j2][k] != -1) {
+						tablero[j2][k] = 7;
+					}
+				}
 			}
 		}
+
 		return 1;
 	}
 
@@ -97,9 +102,9 @@ System.out.println(i+","+j);
 	 *            posición horizontalmente de la casilla a abrir
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
-//	public boolean abrirCasilla(int i, int j) {
-//
-//	}
+	// public boolean abrirCasilla(int i, int j) {
+	//
+	// }
 
 	/**
 	 * Método que checkea si se ha terminado el juego porque se han abierto todas
@@ -108,8 +113,8 @@ System.out.println(i+","+j);
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son
 	 *         minas.
 	 **/
-//	public boolean esFinJuego() {
-//	}
+	// public boolean esFinJuego() {
+	// }
 
 	/**
 	 * Método que pinta por pantalla toda la información del tablero, se utiliza
@@ -137,15 +142,15 @@ System.out.println(i+","+j);
 	 *            : posición horizontal de la cela.
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
-//	public int getMinasAlrededor(int i, int j) {
-//	}
+	// public int getMinasAlrededor(int i, int j) {
+	// }
 
 	/**
 	 * Método que devuelve la puntuación actual
 	 * 
 	 * @return Un entero con la puntuación actual
 	 */
-//	public int getPuntuacion() {
-//	}
+	// public int getPuntuacion() {
+	// }
 
 }
