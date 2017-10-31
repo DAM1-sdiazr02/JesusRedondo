@@ -49,7 +49,10 @@ public class ControlJuego {
 		}
 
 		// tablero[2][2] = -1;
+		// tablero[0][0] = -1;
+		// tablero[7][7] = -1;
 
+		depurarTablero();
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				if (tablero[i][j] == -1) {
@@ -78,15 +81,46 @@ public class ControlJuego {
 	 **/
 	private int calculoMinasAdjuntas(int i, int j) {
 		System.out.println(i + "," + j);
-		if ((i > 0 && j > 0) && (i < (LADO_TABLERO - 1) && j > (LADO_TABLERO - 1))) {
-			for (int j2 = i - 1; j2 < i + 2; j2++) {
-				for (int k = j - 1; k < j + 2; k++) {
-					if (tablero[j2][k] != -1) {
-						tablero[j2][k] = 7;
-					}
-				}
-			}
+
+		// if ((i > 0 && j > 0) && (i < (LADO_TABLERO - 1) && j > (LADO_TABLERO - 1))) {
+		// caso1
+		if (i == 0 && j == 0) {
+			tablero[i + 1][j + 1] += 1;
+			tablero[i][j + 1] = +1;
+			tablero[i + 1][j] = +1;
+			// caso2
+		} else if (i == 0 && j == 9) {
+			tablero[i][j-1] += 1;
+			tablero[i+1][j+1] = +1;
+			tablero[i+1][j] = +1;
+		} else if(i==9 && j==0){
+			
+			tablero[i-1][j] += 1;
+			tablero[i][j-1] = +1;
+			tablero[i-1][j-1] = +1;
+			// for (int j2 = i - 1; j2 < i + 2; j2++) {
+			// for (int k = j - 1; k < j + 2; k++) {
+			// if (tablero[j2][k] != -1) {
+			// tablero[j2][k] += 1;
+			// }
+			// }
+			// }
+		}else if(i==9 && j==9) {
+			tablero[i][j-1] += 1;
+			tablero[i-1][j] = +1;
+			tablero[i-1][j-1] = +1;
+		}else if(i==0 && (j<9 && j>0)) {
+			tablero[i-1][j] += 1;
+			tablero[i][j] = +1;
+			tablero[i][j] = +1;
+			tablero[i][j] += 1;
+			tablero[i][j] = +1;
 		}
+		/*
+		 * for (int j2 = i - 1; j2 < i + 2; j2++) { for (int k = j - 1; k < j + 2; k++)
+		 * { if (tablero[j2][k] != -1) { tablero[j2][k] = 7; } } }
+		 */
+		// }
 
 		return 1;
 	}
