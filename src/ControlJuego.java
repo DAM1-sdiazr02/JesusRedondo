@@ -82,50 +82,141 @@ public class ControlJuego {
 	private int calculoMinasAdjuntas(int i, int j) {
 		System.out.println(i + "," + j);
 
-		// if ((i > 0 && j > 0) && (i < (LADO_TABLERO - 1) && j > (LADO_TABLERO - 1))) {
-		// caso1
 		if (i == 0 && j == 0) {
-			tablero[i + 1][j + 1] += 1;
-			tablero[i][j + 1] = +1;
-			tablero[i + 1][j] = +1;
+			if (tablero[i][j] != -1) {
+				tablero[i + 1][j + 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i][j + 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i + 1][j] += 1;
+			}
+
 			// caso2
 		} else if (i == 0 && j == 9) {
-			tablero[i][j-1] += 1;
-			tablero[i+1][j+1] = +1;
-			tablero[i+1][j] = +1;
-			//caso3
-		} else if(i==9 && j==0){			
-			tablero[i-1][j] += 1;
-			tablero[i][j-1] = +1;
-			tablero[i-1][j-1] = +1;
-			// for (int j2 = i - 1; j2 < i + 2; j2++) {
-			// for (int k = j - 1; k < j + 2; k++) {
-			// if (tablero[j2][k] != -1) {
-			// tablero[j2][k] += 1;
-			// }
-			// }
-			// }
-			
-			//Caso4
-		}else if(i==9 && j==9) {
-			tablero[i][j-1] += 1;
-			tablero[i-1][j] = +1;
-			tablero[i-1][j-1] = +1;
-			
-		}else if(i==0 && (j<9 && j>0)) {
-			tablero[i-1][j] += 1;
-			tablero[i][j] = +1;
-			tablero[i][j] = +1;
-			tablero[i][j] += 1;
-			tablero[i][j] = +1;
+			if (tablero[i][j] != -1) {
+				tablero[i][j - 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i + 1][j - 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i + 1][j] += 1;
+			}
+			// caso3
+		} else if (i == 9 && j == 0) {
+			if (tablero[i][j] != -1) {
+				tablero[i - 1][j] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i][j + 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i - 1][j + 1] += 1;
+			}
+
+			// Caso4
+		} else if (i == 9 && j == 9) {
+			if (tablero[i][j] != -1) {
+				tablero[i][j - 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i - 1][j] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i - 1][j - 1] += 1;
+			}
+
+			// caso5
+		} else if (i == 0 && (j < 9 && j > 0)) {
+			if (tablero[i][j] != -1) {
+				tablero[i][j + 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i + 1][j + 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i + 1][j] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i + 1][j - 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i][j - 1] += 1;
+			}
+			// caso 6
+		} else if (j == 0 && (i < 9 && i > 0)) {
+			if (tablero[i][j] != -1) {
+				tablero[i + 1][j] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i + 1][j + 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i][j + 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i - 1][j] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i - 1][j + 1] += 1;
+			}
+
+			// caso 7
+		} else if (i == 9 && (j < 9 && j > 0)) {
+			if (tablero[i][j] != -1) {
+				tablero[i][j - 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i - 1][j - 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i - 1][j] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i - 1][j + 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i][j + 1] += 1;
+			}
+
+			// caso8
+		} else if (j == 9 && (i < 9 && i > 0)) {
+			if (tablero[i][j] != -1) {
+				tablero[i - 1][j] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i - 1][j - 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i][j - 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+				tablero[i + 1][j - 1] += 1;
+			}
+			if (tablero[i][j] != -1) {
+
+				tablero[i + 1][j] += 1;
+			}
+
+		} else {
+
+			for (int j2 = i - 1; j2 < i + 2; j2++) {
+				for (int k = j - 1; k < j + 2; k++) {
+					if (tablero[j2][k] != -1) {
+						tablero[j2][k] += 1;
+					}
+				}
+			}
+
 		}
-		/*
-		 * for (int j2 = i - 1; j2 < i + 2; j2++) { for (int k = j - 1; k < j + 2; k++)
-		 * { if (tablero[j2][k] != -1) { tablero[j2][k] = 7; } } }
-		 */
-		// }
+
+		// if ((i > 0 && j > 0) && (i < (LADO_TABLERO - 1) && j > (LADO_TABLERO - 1))) {
+		// caso1
 
 		return 1;
+
 	}
 
 	/**
