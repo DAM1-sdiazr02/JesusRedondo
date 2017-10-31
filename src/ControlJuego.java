@@ -53,16 +53,16 @@ public class ControlJuego {
 		// tablero[7][7] = -1;
 
 		depurarTablero();
+
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				if (tablero[i][j] == -1) {
 					calculoMinasAdjuntas(i, j);
 				}
 			}
-			System.out.println();
 		}
 		System.out.println("\nPuntuación: " + puntuacion);
-
+		System.out.println("\nMuestro las adyacentes");
 		depurarTablero();
 
 	}
@@ -80,122 +80,125 @@ public class ControlJuego {
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
 	 **/
 	private int calculoMinasAdjuntas(int i, int j) {
-		System.out.println(i + "," + j);
 
 		if (i == 0 && j == 0) {
-			if (tablero[i][j] != -1) {
+			System.out.println("entro 1");
+			if (tablero[i + 1][j + 1] != -1) {
 				tablero[i + 1][j + 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i][j + 1] != -1) {
 				tablero[i][j + 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i + 1][j] != -1) {
 				tablero[i + 1][j] += 1;
 			}
 
 			// caso2
 		} else if (i == 0 && j == 9) {
-			if (tablero[i][j] != -1) {
+			System.out.println("entro 2");
+			if (tablero[i][j - 1] != -1) {
 				tablero[i][j - 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i + 1][j - 1] != -1) {
 				tablero[i + 1][j - 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i + 1][j] != -1) {
 				tablero[i + 1][j] += 1;
 			}
 			// caso3
 		} else if (i == 9 && j == 0) {
-			if (tablero[i][j] != -1) {
+			System.out.println("entro 3");
+			if (tablero[i - 1][j] != -1) {
 				tablero[i - 1][j] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i][j + 1] != -1) {
 				tablero[i][j + 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i - 1][j + 1] != -1) {
 				tablero[i - 1][j + 1] += 1;
 			}
 
 			// Caso4
 		} else if (i == 9 && j == 9) {
-			if (tablero[i][j] != -1) {
+			System.out.println("entro 4");
+			if (tablero[i][j - 1] != -1) {
 				tablero[i][j - 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i - 1][j] != -1) {
 				tablero[i - 1][j] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i - 1][j - 1] != -1) {
 				tablero[i - 1][j - 1] += 1;
 			}
 
 			// caso5
 		} else if (i == 0 && (j < 9 && j > 0)) {
-			if (tablero[i][j] != -1) {
+			if (tablero[i][j + 1] != -1) {
 				tablero[i][j + 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i + 1][j + 1] != -1) {
 				tablero[i + 1][j + 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i + 1][j] != -1) {
 				tablero[i + 1][j] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i + 1][j - 1] != -1) {
 				tablero[i + 1][j - 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i][j - 1] != -1) {
 				tablero[i][j - 1] += 1;
 			}
 			// caso 6
 		} else if (j == 0 && (i < 9 && i > 0)) {
-			if (tablero[i][j] != -1) {
+			if (tablero[i + 1][j] != -1) {
 				tablero[i + 1][j] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i + 1][j + 1] != -1) {
 				tablero[i + 1][j + 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i][j + 1] != -1) {
 				tablero[i][j + 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i - 1][j] != -1) {
 				tablero[i - 1][j] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i - 1][j + 1] != -1) {
 				tablero[i - 1][j + 1] += 1;
 			}
 
 			// caso 7
 		} else if (i == 9 && (j < 9 && j > 0)) {
-			if (tablero[i][j] != -1) {
+			if (tablero[i][j - 1] != -1) {
 				tablero[i][j - 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i - 1][j - 1] != -1) {
 				tablero[i - 1][j - 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i - 1][j] != -1) {
 				tablero[i - 1][j] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i - 1][j + 1] != -1) {
 				tablero[i - 1][j + 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i][j + 1] != -1) {
 				tablero[i][j + 1] += 1;
 			}
 
 			// caso8
 		} else if (j == 9 && (i < 9 && i > 0)) {
-			if (tablero[i][j] != -1) {
+			if (tablero[i - 1][j] != -1) {
 				tablero[i - 1][j] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i - 1][j - 1] != -1) {
 				tablero[i - 1][j - 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i][j - 1] != -1) {
 				tablero[i][j - 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i + 1][j - 1] != -1) {
 				tablero[i + 1][j - 1] += 1;
 			}
-			if (tablero[i][j] != -1) {
+			if (tablero[i + 1][j] != -1) {
 
 				tablero[i + 1][j] += 1;
 			}
