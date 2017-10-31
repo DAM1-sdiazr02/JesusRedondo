@@ -199,7 +199,6 @@ public class ControlJuego {
 				tablero[i + 1][j - 1] += 1;
 			}
 			if (tablero[i + 1][j] != -1) {
-
 				tablero[i + 1][j] += 1;
 			}
 
@@ -215,10 +214,7 @@ public class ControlJuego {
 
 		}
 
-		// if ((i > 0 && j > 0) && (i < (LADO_TABLERO - 1) && j > (LADO_TABLERO - 1))) {
-		// caso1
-
-		return 1;
+		return tablero[i][j];
 
 	}
 
@@ -273,15 +269,151 @@ public class ControlJuego {
 	 *            : posición horizontal de la cela.
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
-	// public int getMinasAlrededor(int i, int j) {
-	// }
+	public int getMinasAlrededor(int i, int j) {
+		int contador = 0;
+		
+		if (i == 0 && j == 0) {
+			System.out.println("entro 1");
+			if (tablero[i + 1][j + 1] == -1) {
+				contador++;
+			}
+			if (tablero[i][j + 1] == -1) {
+				contador++;
+			}
+			if (tablero[i + 1][j] == -1) {
+				contador++;
+			}
+
+			// caso2
+		} else if (i == 0 && j == 9) {
+			System.out.println("entro 2");
+			if (tablero[i][j - 1] == -1) {
+				contador++;
+			}
+			if (tablero[i + 1][j - 1] == -1) {
+				contador++;
+			}
+			if (tablero[i + 1][j] == -1) {
+				contador++;
+			}
+			// caso3
+		} else if (i == 9 && j == 0) {
+			System.out.println("entro 3");
+			if (tablero[i - 1][j] == -1) {
+				contador++;
+			}
+			if (tablero[i][j + 1] == -1) {
+				contador++;
+			}
+			if (tablero[i - 1][j + 1] == -1) {
+				contador++;
+			}
+
+			// Caso4
+		} else if (i == 9 && j == 9) {
+			System.out.println("entro 4");
+			if (tablero[i][j - 1] == -1) {
+				contador++;
+			}
+			if (tablero[i - 1][j] == -1) {
+				contador++;
+			}
+			if (tablero[i - 1][j - 1] == -1) {
+				contador++;
+			}
+
+			// caso5
+		} else if (i == 0 && (j < 9 && j > 0)) {
+			if (tablero[i][j + 1] == -1) {
+				contador++;
+			}
+			if (tablero[i + 1][j + 1] == -1) {
+				contador++;
+			}
+			if (tablero[i + 1][j] == -1) {
+				contador++;
+			}
+			if (tablero[i + 1][j - 1] == -1) {
+				contador++;
+			}
+			if (tablero[i][j - 1] == -1) {
+				contador++;
+			}
+			// caso 6
+		} else if (j == 0 && (i < 9 && i > 0)) {
+			if (tablero[i + 1][j] == -1) {
+				contador++;
+			}
+			if (tablero[i + 1][j + 1] == -1) {
+				contador++;
+			}
+			if (tablero[i][j + 1] == -1) {
+				contador++;
+			}
+			if (tablero[i - 1][j] == -1) {
+				contador++;
+			}
+			if (tablero[i - 1][j + 1] == -1) {
+				contador++;
+			}
+
+			// caso 7
+		} else if (i == 9 && (j < 9 && j > 0)) {
+			if (tablero[i][j - 1] == -1) {
+				contador++;
+			}
+			if (tablero[i - 1][j - 1] == -1) {
+				contador++;
+			}
+			if (tablero[i - 1][j] == -1) {
+				contador++;
+			}
+			if (tablero[i - 1][j + 1] == -1) {
+				contador++;
+			}
+			if (tablero[i][j + 1] == -1) {
+				contador++;
+			}
+
+			// caso8
+		} else if (j == 9 && (i < 9 && i > 0)) {
+			if (tablero[i - 1][j] == -1) {
+				contador++;
+			}
+			if (tablero[i - 1][j - 1] == -1) {
+				contador++;
+			}
+			if (tablero[i][j - 1] == -1) {
+				contador++;
+			}
+			if (tablero[i + 1][j - 1] == -1) {
+				contador++;
+			}
+			if (tablero[i + 1][j] == -1) {
+				contador++;
+			}
+
+		} else {
+
+			for (int j2 = i - 1; j2 < i + 2; j2++) {
+				for (int k = j - 1; k < j + 2; k++) {
+					if (tablero[j2][k] == -1) {
+						contador++;
+					}
+				}
+			}
+
+		}
+		return contador;
+	}
 
 	/**
 	 * Método que devuelve la puntuación actual
 	 * 
 	 * @return Un entero con la puntuación actual
 	 */
-	// public int getPuntuacion() {
-	// }
+	public int getPuntuacion() {
+		return puntuacion;
+	}
 
 }
