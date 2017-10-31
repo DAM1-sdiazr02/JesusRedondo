@@ -93,8 +93,8 @@ public class ControlJuego {
 			tablero[i][j-1] += 1;
 			tablero[i+1][j+1] = +1;
 			tablero[i+1][j] = +1;
-		} else if(i==9 && j==0){
-			
+			//caso3
+		} else if(i==9 && j==0){			
 			tablero[i-1][j] += 1;
 			tablero[i][j-1] = +1;
 			tablero[i-1][j-1] = +1;
@@ -105,10 +105,13 @@ public class ControlJuego {
 			// }
 			// }
 			// }
+			
+			//Caso4
 		}else if(i==9 && j==9) {
 			tablero[i][j-1] += 1;
 			tablero[i-1][j] = +1;
 			tablero[i-1][j-1] = +1;
+			
 		}else if(i==0 && (j<9 && j>0)) {
 			tablero[i-1][j] += 1;
 			tablero[i][j] = +1;
