@@ -36,13 +36,12 @@ public class ControlJuego {
 	 *        minas guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida() {
-		tablero = new int[10][10];
 		Random rd = new Random();
 
 		for (int i = 0; i < MINAS_INICIALES; i++) {
-			int coordX = rd.nextInt(10), coordY = rd.nextInt(10);
-			if (tablero[coordX][coordY] != -1) {
-				tablero[coordX][coordY] = -1;
+			int coordX = rd.nextInt(LADO_TABLERO), coordY = rd.nextInt(LADO_TABLERO);
+			if (tablero[coordX][coordY] != MINA) {
+				tablero[coordX][coordY] = MINA;
 			} else {
 				i--;
 			}
@@ -56,7 +55,7 @@ public class ControlJuego {
 
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
-				if (tablero[i][j] == -1) {
+				if (tablero[i][j] == MINA) {
 					calculoMinasAdjuntas(i, j);
 				}
 			}
@@ -82,123 +81,119 @@ public class ControlJuego {
 	private int calculoMinasAdjuntas(int i, int j) {
 
 		if (i == 0 && j == 0) {
-			System.out.println("entro 1");
-			if (tablero[i + 1][j + 1] != -1) {
+			if (tablero[i + 1][j + 1] != MINA) {
 				tablero[i + 1][j + 1] += 1;
 			}
-			if (tablero[i][j + 1] != -1) {
+			if (tablero[i][j + 1] != MINA) {
 				tablero[i][j + 1] += 1;
 			}
-			if (tablero[i + 1][j] != -1) {
+			if (tablero[i + 1][j] != MINA) {
 				tablero[i + 1][j] += 1;
 			}
 
 			// caso2
 		} else if (i == 0 && j == 9) {
-			System.out.println("entro 2");
-			if (tablero[i][j - 1] != -1) {
+			if (tablero[i][j - 1] != MINA) {
 				tablero[i][j - 1] += 1;
 			}
-			if (tablero[i + 1][j - 1] != -1) {
+			if (tablero[i + 1][j - 1] != MINA) {
 				tablero[i + 1][j - 1] += 1;
 			}
-			if (tablero[i + 1][j] != -1) {
+			if (tablero[i + 1][j] != MINA) {
 				tablero[i + 1][j] += 1;
 			}
 			// caso3
 		} else if (i == 9 && j == 0) {
-			System.out.println("entro 3");
-			if (tablero[i - 1][j] != -1) {
+			if (tablero[i - 1][j] != MINA) {
 				tablero[i - 1][j] += 1;
 			}
-			if (tablero[i][j + 1] != -1) {
+			if (tablero[i][j + 1] != MINA) {
 				tablero[i][j + 1] += 1;
 			}
-			if (tablero[i - 1][j + 1] != -1) {
+			if (tablero[i - 1][j + 1] != MINA) {
 				tablero[i - 1][j + 1] += 1;
 			}
 
 			// Caso4
 		} else if (i == 9 && j == 9) {
-			System.out.println("entro 4");
-			if (tablero[i][j - 1] != -1) {
+			if (tablero[i][j - 1] != MINA) {
 				tablero[i][j - 1] += 1;
 			}
-			if (tablero[i - 1][j] != -1) {
+			if (tablero[i - 1][j] != MINA) {
 				tablero[i - 1][j] += 1;
 			}
-			if (tablero[i - 1][j - 1] != -1) {
+			if (tablero[i - 1][j - 1] != MINA) {
 				tablero[i - 1][j - 1] += 1;
 			}
 
 			// caso5
 		} else if (i == 0 && (j < 9 && j > 0)) {
-			if (tablero[i][j + 1] != -1) {
+			if (tablero[i][j + 1] != MINA) {
 				tablero[i][j + 1] += 1;
 			}
-			if (tablero[i + 1][j + 1] != -1) {
+			if (tablero[i + 1][j + 1] != MINA) {
 				tablero[i + 1][j + 1] += 1;
 			}
-			if (tablero[i + 1][j] != -1) {
+			if (tablero[i + 1][j] != MINA) {
 				tablero[i + 1][j] += 1;
 			}
-			if (tablero[i + 1][j - 1] != -1) {
+			if (tablero[i + 1][j - 1] != MINA) {
 				tablero[i + 1][j - 1] += 1;
 			}
-			if (tablero[i][j - 1] != -1) {
+			if (tablero[i][j - 1] != MINA) {
 				tablero[i][j - 1] += 1;
 			}
 			// caso 6
 		} else if (j == 0 && (i < 9 && i > 0)) {
-			if (tablero[i + 1][j] != -1) {
+			if (tablero[i + 1][j] != MINA) {
 				tablero[i + 1][j] += 1;
 			}
-			if (tablero[i + 1][j + 1] != -1) {
+			if (tablero[i + 1][j + 1] != MINA) {
 				tablero[i + 1][j + 1] += 1;
 			}
-			if (tablero[i][j + 1] != -1) {
+			if (tablero[i][j + 1] != MINA) {
 				tablero[i][j + 1] += 1;
 			}
-			if (tablero[i - 1][j] != -1) {
+			if (tablero[i - 1][j] != MINA) {
 				tablero[i - 1][j] += 1;
 			}
-			if (tablero[i - 1][j + 1] != -1) {
+			if (tablero[i - 1][j + 1] != MINA) {
 				tablero[i - 1][j + 1] += 1;
 			}
 
 			// caso 7
 		} else if (i == 9 && (j < 9 && j > 0)) {
-			if (tablero[i][j - 1] != -1) {
+			if (tablero[i][j - 1] != MINA) {
 				tablero[i][j - 1] += 1;
 			}
-			if (tablero[i - 1][j - 1] != -1) {
+			if (tablero[i - 1][j - 1] != MINA) {
 				tablero[i - 1][j - 1] += 1;
 			}
-			if (tablero[i - 1][j] != -1) {
+			if (tablero[i - 1][j] != MINA) {
 				tablero[i - 1][j] += 1;
 			}
-			if (tablero[i - 1][j + 1] != -1) {
+			if (tablero[i - 1][j + 1] != MINA) {
 				tablero[i - 1][j + 1] += 1;
 			}
-			if (tablero[i][j + 1] != -1) {
+			if (tablero[i][j + 1] != MINA) {
 				tablero[i][j + 1] += 1;
 			}
 
 			// caso8
 		} else if (j == 9 && (i < 9 && i > 0)) {
-			if (tablero[i - 1][j] != -1) {
+			if (tablero[i - 1][j] != MINA) {
 				tablero[i - 1][j] += 1;
 			}
-			if (tablero[i - 1][j - 1] != -1) {
+			if (tablero[i - 1][j - 1] != MINA) {
 				tablero[i - 1][j - 1] += 1;
 			}
-			if (tablero[i][j - 1] != -1) {
+			if (tablero[i][j - 1] != MINA) {
 				tablero[i][j - 1] += 1;
 			}
-			if (tablero[i + 1][j - 1] != -1) {
+			if (tablero[i + 1][j - 1] != MINA) {
 				tablero[i + 1][j - 1] += 1;
 			}
-			if (tablero[i + 1][j] != -1) {
+			if (tablero[i + 1][j] != MINA) {
 				tablero[i + 1][j] += 1;
 			}
 
@@ -206,7 +201,7 @@ public class ControlJuego {
 
 			for (int j2 = i - 1; j2 < i + 2; j2++) {
 				for (int k = j - 1; k < j + 2; k++) {
-					if (tablero[j2][k] != -1) {
+					if (tablero[j2][k] != MINA) {
 						tablero[j2][k] += 1;
 					}
 				}
@@ -229,9 +224,13 @@ public class ControlJuego {
 	 *            posición horizontalmente de la casilla a abrir
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
-	// public boolean abrirCasilla(int i, int j) {
-	//
-	// }
+	public boolean abrirCasilla(int i, int j) {
+		if (tablero[i][j] == MINA) {
+			return false;
+		}
+		puntuacion++;
+		return true;
+	}
 
 	/**
 	 * Método que checkea si se ha terminado el juego porque se han abierto todas
@@ -240,8 +239,12 @@ public class ControlJuego {
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son
 	 *         minas.
 	 **/
-	// public boolean esFinJuego() {
-	// }
+	public boolean esFinJuego() { // Si la puntuacion es 80 en este caso.
+		if (puntuacion == (Math.pow(LADO_TABLERO, 2)) - MINAS_INICIALES) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Método que pinta por pantalla toda la información del tablero, se utiliza
@@ -270,141 +273,7 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
 	public int getMinasAlrededor(int i, int j) {
-		int contador = 0;
-		
-		if (i == 0 && j == 0) {
-			System.out.println("entro 1");
-			if (tablero[i + 1][j + 1] == -1) {
-				contador++;
-			}
-			if (tablero[i][j + 1] == -1) {
-				contador++;
-			}
-			if (tablero[i + 1][j] == -1) {
-				contador++;
-			}
-
-			// caso2
-		} else if (i == 0 && j == 9) {
-			System.out.println("entro 2");
-			if (tablero[i][j - 1] == -1) {
-				contador++;
-			}
-			if (tablero[i + 1][j - 1] == -1) {
-				contador++;
-			}
-			if (tablero[i + 1][j] == -1) {
-				contador++;
-			}
-			// caso3
-		} else if (i == 9 && j == 0) {
-			System.out.println("entro 3");
-			if (tablero[i - 1][j] == -1) {
-				contador++;
-			}
-			if (tablero[i][j + 1] == -1) {
-				contador++;
-			}
-			if (tablero[i - 1][j + 1] == -1) {
-				contador++;
-			}
-
-			// Caso4
-		} else if (i == 9 && j == 9) {
-			System.out.println("entro 4");
-			if (tablero[i][j - 1] == -1) {
-				contador++;
-			}
-			if (tablero[i - 1][j] == -1) {
-				contador++;
-			}
-			if (tablero[i - 1][j - 1] == -1) {
-				contador++;
-			}
-
-			// caso5
-		} else if (i == 0 && (j < 9 && j > 0)) {
-			if (tablero[i][j + 1] == -1) {
-				contador++;
-			}
-			if (tablero[i + 1][j + 1] == -1) {
-				contador++;
-			}
-			if (tablero[i + 1][j] == -1) {
-				contador++;
-			}
-			if (tablero[i + 1][j - 1] == -1) {
-				contador++;
-			}
-			if (tablero[i][j - 1] == -1) {
-				contador++;
-			}
-			// caso 6
-		} else if (j == 0 && (i < 9 && i > 0)) {
-			if (tablero[i + 1][j] == -1) {
-				contador++;
-			}
-			if (tablero[i + 1][j + 1] == -1) {
-				contador++;
-			}
-			if (tablero[i][j + 1] == -1) {
-				contador++;
-			}
-			if (tablero[i - 1][j] == -1) {
-				contador++;
-			}
-			if (tablero[i - 1][j + 1] == -1) {
-				contador++;
-			}
-
-			// caso 7
-		} else if (i == 9 && (j < 9 && j > 0)) {
-			if (tablero[i][j - 1] == -1) {
-				contador++;
-			}
-			if (tablero[i - 1][j - 1] == -1) {
-				contador++;
-			}
-			if (tablero[i - 1][j] == -1) {
-				contador++;
-			}
-			if (tablero[i - 1][j + 1] == -1) {
-				contador++;
-			}
-			if (tablero[i][j + 1] == -1) {
-				contador++;
-			}
-
-			// caso8
-		} else if (j == 9 && (i < 9 && i > 0)) {
-			if (tablero[i - 1][j] == -1) {
-				contador++;
-			}
-			if (tablero[i - 1][j - 1] == -1) {
-				contador++;
-			}
-			if (tablero[i][j - 1] == -1) {
-				contador++;
-			}
-			if (tablero[i + 1][j - 1] == -1) {
-				contador++;
-			}
-			if (tablero[i + 1][j] == -1) {
-				contador++;
-			}
-
-		} else {
-
-			for (int j2 = i - 1; j2 < i + 2; j2++) {
-				for (int k = j - 1; k < j + 2; k++) {
-					if (tablero[j2][k] == -1) {
-						contador++;
-					}
-				}
-			}
-
-		}
-		return contador;
+		return tablero[i][j];
 	}
 
 	/**
