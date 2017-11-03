@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
@@ -139,9 +140,33 @@ public class VentanaPrincipal {
 	public void inicializarListeners() {
 		for (int i = 0; i < botonesJuego.length; i++) {
 			for (int j = 0; j < botonesJuego.length; j++) {
-				botonesJuego[i][j].addActionListener(new ActionBoton(ventanaPrincipal,i,j));
+				botonesJuego[i][j].addActionListener(new ActionBoton(ventanaPrincipal, i, j));
 			}
 		}
+		
+		
+		botonEmpezar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				for (int i = 0; i < panelesJuego.length; i++) {
+					for (int j = 0; j < panelesJuego.length; j++) {
+						panelesJuego[i][j].removeAll();
+					}
+				}
+			//	refrescarPantalla();
+				for (int i = 0; i < panelesJuego.length; i++) {
+					for (int j = 0; j < panelesJuego.length; j++) {
+						botonesJuego[i][j] = new JButton("-");
+						//panelesJuego[i][j] = new JPanel();
+						botonesJuego[i][j].addActionListener(new ActionBoton(ventanaPrincipal, i, j));
+						panelesJuego[i][j].add(botonesJuego[i][j]);
+					}
+				}
+				refrescarPantalla();
+			}
+		});
 	}
 
 	/**
@@ -160,7 +185,12 @@ public class VentanaPrincipal {
 	public void mostrarNumMinasAlrededor(int i, int j) {
 		panelesJuego[i][j].removeAll();
 		refrescarPantalla();
-		//juego.getMinasAlrededor(i, j);
+		JLabel labelMinas = new JLabel(String.valueOf(juego.getMinasAlrededor(i, j)));
+		GridBagLayout layout = new GridBagLayout();
+		panelesJuego[i][j].setLayout(layout);
+		panelesJuego[i][j].add(labelMinas, null);
+		actualizarPuntuacion();
+		refrescarPantalla();
 	}
 
 	/**
@@ -173,14 +203,21 @@ public class VentanaPrincipal {
 	 *       juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		// TODO
+		if (!porExplosion) {
+			System.out.println("Has perdido");
+			for (int i = 0; i < botonesJuego.length; i++) {
+				for (int j = 0; j < botonesJuego.length; j++) {
+					botonesJuego[i][j].setEnabled(false);
+				}
+			}
+		}
 	}
 
 	/**
 	 * Método que muestra la puntuación por pantalla.
 	 */
 	public void actualizarPuntuacion() {
-		//
+		pantallaPuntuacion.setText(String.valueOf(juego.getPuntuacion()));
 	}
 
 	/**

@@ -35,12 +35,13 @@ public class ActionBoton implements ActionListener {
 
 			if (!ventana.getJuego().esFinJuego()) {
 
-				System.out.println("NO HAY MINA");
 				ventana.mostrarNumMinasAlrededor(i, j);
+			}else {
+				ventana.mostrarFinJuego(true);
 			}
 
 		} else {
-
+			ventana.mostrarFinJuego(false);
 		}
 	}
 
