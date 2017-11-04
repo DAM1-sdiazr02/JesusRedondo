@@ -143,23 +143,22 @@ public class VentanaPrincipal {
 				botonesJuego[i][j].addActionListener(new ActionBoton(ventanaPrincipal, i, j));
 			}
 		}
-		
-		
+
 		botonEmpezar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
+				juego = new ControlJuego();
 				for (int i = 0; i < panelesJuego.length; i++) {
 					for (int j = 0; j < panelesJuego.length; j++) {
 						panelesJuego[i][j].removeAll();
 					}
 				}
-			//	refrescarPantalla();
+				// refrescarPantalla();
 				for (int i = 0; i < panelesJuego.length; i++) {
 					for (int j = 0; j < panelesJuego.length; j++) {
 						botonesJuego[i][j] = new JButton("-");
-						//panelesJuego[i][j] = new JPanel();
+						// panelesJuego[i][j] = new JPanel();
 						botonesJuego[i][j].addActionListener(new ActionBoton(ventanaPrincipal, i, j));
 						panelesJuego[i][j].add(botonesJuego[i][j]);
 					}
@@ -186,6 +185,7 @@ public class VentanaPrincipal {
 		panelesJuego[i][j].removeAll();
 		refrescarPantalla();
 		JLabel labelMinas = new JLabel(String.valueOf(juego.getMinasAlrededor(i, j)));
+		labelMinas.setForeground(correspondenciaColores[juego.getMinasAlrededor(i, j)]);
 		GridBagLayout layout = new GridBagLayout();
 		panelesJuego[i][j].setLayout(layout);
 		panelesJuego[i][j].add(labelMinas, null);
