@@ -2,10 +2,17 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +29,7 @@ public class VentanaPrincipal {
 	JPanel panelEmpezar;
 	JPanel panelPuntuacion;
 	JPanel panelJuego;
-	VentanaPrincipal ventanaPrincipal = this;
+	VentanaPrincipal ventanaPrincipal = this; //Referencio la ventana principal para pasarsela al ActionBoton.
 
 	// Todos los botones se meten en un panel independiente.
 	// Hacemos esto para que podamos cambiar después los componentes por otros
@@ -69,6 +76,19 @@ public class VentanaPrincipal {
 
 		// Bordes y colores:
 		panelImagen.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+		
+		PONGO LA IMAGEN PERO SE DESCUADRA AUNQUE COJA LAS MEDIDAS DEL JPANEL (son 0).
+//		panelImagen.setLayout(new GridLayout(1,1));
+//		try {
+//			BufferedImage img = ImageIO.read(new File("logotipobuscaminas.jpg"));
+//			ImageIcon icono = new ImageIcon(img.getScaledInstance(100, 50, 1));
+//			JLabel label = new JLabel(icono);
+//			panelImagen.add(label);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 		panelEmpezar.setBorder(BorderFactory.createTitledBorder("Empezar"));
 		panelPuntuacion.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 		panelJuego.setBorder(BorderFactory.createTitledBorder("Juego"));
@@ -154,11 +174,9 @@ public class VentanaPrincipal {
 						panelesJuego[i][j].removeAll();
 					}
 				}
-				// refrescarPantalla();
 				for (int i = 0; i < panelesJuego.length; i++) {
 					for (int j = 0; j < panelesJuego.length; j++) {
 						botonesJuego[i][j] = new JButton("-");
-						// panelesJuego[i][j] = new JPanel();
 						botonesJuego[i][j].addActionListener(new ActionBoton(ventanaPrincipal, i, j));
 						panelesJuego[i][j].add(botonesJuego[i][j]);
 					}
