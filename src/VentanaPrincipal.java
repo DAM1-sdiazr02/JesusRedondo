@@ -187,6 +187,7 @@ public class VentanaPrincipal {
 						panelesJuego[i][j].add(botonesJuego[i][j]);
 					}
 				}
+				pantallaPuntuacion.setText("0");
 				refrescarPantalla();
 			}
 		});
