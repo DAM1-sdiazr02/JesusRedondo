@@ -19,6 +19,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+/**
+ * 
+ * @author JesúsRedondo
+ * @version 1.0 SergioDíazReal.
+ */
 public class VentanaPrincipal {
 
 	// La ventana principal, en este caso, guarda todos los componentes:
@@ -46,7 +51,7 @@ public class VentanaPrincipal {
 
 	// Constructor, marca el tamaÃ±o y el cierre del frame
 	public VentanaPrincipal() {
-		ventana = new JFrame();
+		ventana = new JFrame("Buscaminas                  Sergio Díaz Real");
 		ventana.setBounds(100, 100, 700, 500);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		juego = new ControlJuego();
@@ -175,8 +180,10 @@ public class VentanaPrincipal {
 				for (int i = 0; i < panelesJuego.length; i++) {
 					for (int j = 0; j < panelesJuego.length; j++) {
 						panelesJuego[i][j].removeAll();
+						refrescarPantalla();
 					}
 				}
+				botonesJuego = new JButton[10][10];
 				for (int i = 0; i < panelesJuego.length; i++) {
 					for (int j = 0; j < panelesJuego.length; j++) {
 						botonesJuego[i][j] = new JButton("-");
@@ -208,8 +215,10 @@ public class VentanaPrincipal {
 		refrescarPantalla();
 		JLabel labelMinas = new JLabel(String.valueOf(juego.getMinasAlrededor(i, j)));
 		labelMinas.setForeground(correspondenciaColores[juego.getMinasAlrededor(i, j)]);
-		GridBagLayout layout = new GridBagLayout();
-		panelesJuego[i][j].setLayout(layout);
+//		GridBagLayout layout = new GridBagLayout();
+//		panelesJuego[i][j].setLayout(layout);
+		labelMinas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		labelMinas.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 		panelesJuego[i][j].add(labelMinas, null);
 		actualizarPuntuacion();
 		refrescarPantalla();
