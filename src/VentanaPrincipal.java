@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,7 +30,7 @@ public class VentanaPrincipal {
 	JPanel panelEmpezar;
 	JPanel panelPuntuacion;
 	JPanel panelJuego;
-	VentanaPrincipal ventanaPrincipal = this; //Referencio la ventana principal para pasarsela al ActionBoton.
+	VentanaPrincipal ventanaPrincipal = this; // Referencio la ventana principal para pasarsela al ActionBoton.
 
 	// Todos los botones se meten en un panel independiente.
 	// Hacemos esto para que podamos cambiar despuÃ©s los componentes por otros
@@ -37,8 +38,8 @@ public class VentanaPrincipal {
 	JButton[][] botonesJuego;
 
 	// Correspondencia de colores para las minas:
-	Color correspondenciaColores[] = { Color.BLACK, Color.CYAN, Color.GREEN, Color.ORANGE, Color.RED, Color.RED,
-			Color.RED, Color.RED, Color.RED, Color.RED };
+	Color correspondenciaColores[] = { Color.BLACK, Color.CYAN, Color.GREEN, Color.ORANGE, Color.RED, Color.DARK_GRAY,
+			Color.YELLOW, Color.GRAY, Color.PINK, Color.RED };
 
 	JButton botonEmpezar;
 	JTextField pantallaPuntuacion;
@@ -76,19 +77,19 @@ public class VentanaPrincipal {
 
 		// Bordes y colores:
 		panelImagen.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
-		
-		PONGO LA IMAGEN PERO SE DESCUADRA AUNQUE COJA LAS MEDIDAS DEL JPANEL (son 0).
-//		panelImagen.setLayout(new GridLayout(1,1));
-//		try {
-//			BufferedImage img = ImageIO.read(new File("logotipobuscaminas.jpg"));
-//			ImageIcon icono = new ImageIcon(img.getScaledInstance(100, 50, 1));
-//			JLabel label = new JLabel(icono);
-//			panelImagen.add(label);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
+
+		// PONGO LA IMAGEN PERO SE DESCUADRA AUNQUE COJA LAS MEDIDAS DEL JPANEL (son 0).
+		panelImagen.setLayout(new GridLayout(1, 1));
+		try {
+			BufferedImage img = ImageIO.read(new File("logotipobuscaminas.jpg"));
+			ImageIcon icono = new ImageIcon(img.getScaledInstance(100, 50, 1));
+			JLabel label = new JLabel(icono);
+			panelImagen.add(label);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		panelEmpezar.setBorder(BorderFactory.createTitledBorder("Empezar"));
 		panelPuntuacion.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 		panelJuego.setBorder(BorderFactory.createTitledBorder("Juego"));
@@ -164,8 +165,13 @@ public class VentanaPrincipal {
 			}
 		}
 
+		//Listener del botonEmpezar
 		botonEmpezar.addActionListener(new ActionListener() {
 
+			/**
+			 * Crea un nuevo juego ControlJuego. Elimina todos los elementos de los paneles 
+			 * inicializa los listener nuevamente y añade esos botones a los paneles respectivos.
+			 */
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				juego = new ControlJuego();
@@ -228,6 +234,10 @@ public class VentanaPrincipal {
 					botonesJuego[i][j].setEnabled(false);
 				}
 			}
+			JOptionPane.showMessageDialog(null, "          \n          BOOM!!!\n          ", "Has perdido!", 1);
+		} else {
+			JOptionPane.showMessageDialog(null, "          \n          HAS GANADO!!!!!!!\n          ",
+					"ENHORABUENA", 1);
 		}
 	}
 

@@ -11,14 +11,26 @@ import java.awt.event.ActionListener;
  **
  */
 public class ActionBoton implements ActionListener {
+	// Atributos
 	VentanaPrincipal ventana;
 	int i;
 	int j;
 
+	// Constructores.
 	public ActionBoton() {
 
 	}
 
+	/**
+	 * 
+	 * @param ventana
+	 *            Referencia a VentanaPrincipal(se usa para acceder a controlJuego y
+	 *            por tanto, al tablero (matriz)).
+	 * @param i
+	 *            fila en la matriz del tablero
+	 * @param j
+	 *            Columna en la matriz del tablero.
+	 */
 	public ActionBoton(VentanaPrincipal ventana, int i, int j) {
 		this.ventana = ventana;
 		this.i = i;
@@ -31,16 +43,17 @@ public class ActionBoton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (ventana.getJuego().abrirCasilla(i, j)) {
+		if (ventana.getJuego().abrirCasilla(i, j)) { // Si al abrir no hay una mina...
 
-			if (!ventana.getJuego().esFinJuego()) {
+			if (!ventana.getJuego().esFinJuego()) { // Si cuando ha abierto la casilla, no ha ganado...
 
-				ventana.mostrarNumMinasAlrededor(i, j);
-			}else {
-				ventana.mostrarFinJuego(true);
+				ventana.mostrarNumMinasAlrededor(i, j); // Abro esa casilla y pinto las minas que rodean esa casilla.
+			} else { // Si ha abierto la última casilla...
+				ventana.mostrarNumMinasAlrededor(i, j); // Abro esa casilla
+				ventana.mostrarFinJuego(true); // Muestro al usuario que ha ganado.
 			}
 
-		} else {
+		} else { // El usuario abrió una mina, se informa de que ha perdido la partida.
 			ventana.mostrarFinJuego(false);
 		}
 	}

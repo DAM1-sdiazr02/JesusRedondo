@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 /**
  * Clase gestora del tablero de juego. Guarda una matriz de enteros representado
  * el tablero. Si hay una mina en una posiciÃ³n guarda el nÃºmero -1 Si no hay
@@ -12,11 +14,11 @@ import java.util.Random;
  */
 public class ControlJuego {
 
-	private final static int MINA = -1;
-	final int MINAS_INICIALES = 20;
+	private final static int MINA = -1; // Representación de las minas.
+	int MINAS_INICIALES; // Minas totales (dificultad).
 	final int LADO_TABLERO = 10;
 
-	private int[][] tablero;
+	private int[][] tablero; // Matriz que forma el tablero.
 	private int puntuacion;
 
 	public ControlJuego() {
@@ -25,6 +27,28 @@ public class ControlJuego {
 
 		// Inicializamos una nueva partida
 		inicializarPartida();
+	}
+
+	/**
+	 * Mejora extra: Pide la dificultad y controla el rango de minas y las posibles
+	 * excepciones. MINAS_INICIALES ya no es final ni tiene valor inicialmente.
+	 * 
+	 * @return minas a rellenar en el panel.
+	 */
+	public int pedirDificultad() {
+		try {
+			int minasIniciales;
+			do {
+				minasIniciales = Integer.parseInt(JOptionPane.showInputDialog(null,
+						"\nIntroduce el nº de minas:\n MÁXIMO-->99\n MÍNIMO-->1.", "Bienvenido al Buscaminas!!", 1));
+			} while (minasIniciales < 1 || minasIniciales > 99);
+
+			return minasIniciales;
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "\nSólo se aceptan números...", "ERROR", 1);
+			return pedirDificultad();
+		}
+
 	}
 
 	/**
@@ -38,21 +62,18 @@ public class ControlJuego {
 	public void inicializarPartida() {
 		Random rd = new Random();
 
+		MINAS_INICIALES = pedirDificultad(); //Pido la dificultad por teclado.
+
+		//Coloco las minas
 		for (int i = 0; i < MINAS_INICIALES; i++) {
 			int coordX = rd.nextInt(LADO_TABLERO), coordY = rd.nextInt(LADO_TABLERO);
 			if (tablero[coordX][coordY] != MINA) {
 				tablero[coordX][coordY] = MINA;
-			} else {
+			} else { //Si en la posicion aleatoria ya habia una mina, repito la iteración.
 				i--;
 			}
 		}
-
-		// tablero[2][2] = -1;
-		// tablero[0][0] = -1;
-		// tablero[7][7] = -1;
-
-		depurarTablero();
-
+		//Coloco las minas adjuntas.
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				if (tablero[i][j] == MINA) {
@@ -60,8 +81,6 @@ public class ControlJuego {
 				}
 			}
 		}
-		System.out.println("\nPuntuaciÃ³n: " + puntuacion);
-		System.out.println("\nMuestro las adyacentes");
 		depurarTablero();
 
 	}
@@ -258,7 +277,6 @@ public class ControlJuego {
 			}
 			System.out.println();
 		}
-		System.out.println("\nPuntuaciÃ³n: " + puntuacion);
 	}
 
 	/**
